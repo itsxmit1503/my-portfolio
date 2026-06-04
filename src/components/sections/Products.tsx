@@ -30,7 +30,7 @@ function TolkifyShowcase() {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
       className="flex flex-col gap-8"
     >
       <TiltCard>
@@ -81,7 +81,7 @@ function UnsaidShowcase() {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
       className="flex flex-col gap-8"
     >
       <TiltCard>
@@ -130,7 +130,7 @@ function TrackMyRailShowcase() {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
       className="flex flex-col gap-8"
     >
       <TiltCard>
@@ -181,7 +181,7 @@ function HillBasketShowcase() {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
       className="flex flex-col gap-8"
     >
       <TiltCard>

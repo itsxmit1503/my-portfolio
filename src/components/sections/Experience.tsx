@@ -54,7 +54,7 @@ export function Experience() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
-              transition={{ delay: i * 0.1, duration: 0.5, ease: "easeOut" }}
+              transition={{ delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] as any }}
               className="relative"
             >
               {/* Timeline Node */}
@@ -75,7 +75,7 @@ export function Experience() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ delay: 0.3, duration: 0.8, ease: "easeOut" }}
+          transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
           className="bg-[#050505] border border-white/10 rounded-2xl p-8 self-start sticky top-32"
         >
           <div className="flex items-center gap-3 mb-6">

@@ -14,7 +14,7 @@ export function Hero() {
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as any } }
   };
 
   return (
@@ -78,7 +78,7 @@ export function Hero() {
         <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut", delay: 0.3 }}
+          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as any, delay: 0.3 }}
           className="relative w-full h-[500px] lg:h-[700px] flex items-center justify-center lg:justify-end pointer-events-none"
         >
           {/* Depth Glows */}

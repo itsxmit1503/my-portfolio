@@ -21,7 +21,7 @@ export function Github() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
           className="lg:col-span-8 w-full rounded-2xl bg-[#050505] border border-white/5 p-8"
         >
           <div className="flex items-center justify-between mb-8">
@@ -68,7 +68,7 @@ export function Github() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ delay: 0.2, duration: 0.8, ease: "easeOut" }}
+          transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
           className="lg:col-span-4 rounded-2xl"
         >
           <SpotlightCard className="w-full h-full bg-white/[0.02] border border-white/5 p-8 flex flex-col justify-center rounded-2xl transition-colors duration-500 hover:border-white/20">
