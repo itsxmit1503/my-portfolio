@@ -43,7 +43,7 @@ export function Skills() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ delay: i * 0.1, duration: 0.6, ease: "easeOut" }}
             className={i >= 3 ? 'md:col-span-2 lg:col-span-1' : ''}
           >
             <SpotlightCard className="h-full flex flex-col rounded-2xl bg-[#050505] border border-white/5 p-8 transition-colors duration-500 hover:border-white/20">

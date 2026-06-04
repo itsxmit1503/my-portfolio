@@ -37,7 +37,7 @@ export function Contact() {
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
           className="bg-[#050505] border border-white/10 rounded-2xl p-8 shadow-2xl"
         >
           <form className="flex flex-col gap-6" onSubmit={(e) => e.preventDefault()}>
