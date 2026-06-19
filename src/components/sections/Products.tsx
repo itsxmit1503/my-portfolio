@@ -72,9 +72,6 @@ function TolkifyShowcase() {
     </motion.div>
   );
 }
-
-}
-
 function HillBasketShowcase() {
   return (
     <motion.div 
