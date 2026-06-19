@@ -19,7 +19,7 @@ export function Hero() {
 
   return (
     <section className="relative min-h-[90vh] flex flex-col justify-center pt-20 overflow-hidden">
-      <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+      <div className="w-full max-w-4xl mx-auto flex flex-col items-start justify-center">
         
         {/* Left Side: Content */}
         <motion.div 
@@ -72,40 +72,6 @@ export function Hero() {
               </a>
             </div>
           </motion.div>
-        </motion.div>
-
-        {/* Right Side: Portrait Integration */}
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] as any, delay: 0.3 }}
-          className="relative w-full h-[500px] lg:h-[700px] flex items-center justify-center lg:justify-end pointer-events-none"
-        >
-          {/* Depth Glows */}
-          <div className="absolute top-1/2 right-10 -translate-y-1/2 w-64 h-64 bg-emerald-500/10 rounded-full blur-[100px]" />
-          <div className="absolute top-1/3 right-1/4 w-48 h-48 bg-blue-500/10 rounded-full blur-[100px]" />
-          
-          {/* Portrait Image with heavy radial & linear gradient masking to dissolve hard edges into the dark background */}
-          <div 
-            className="relative w-[120%] lg:w-[140%] h-full right-0 lg:-right-20"
-            style={{
-              WebkitMaskImage: 'radial-gradient(ellipse at center, black 30%, transparent 70%)',
-              maskImage: 'radial-gradient(ellipse at center, black 30%, transparent 70%)'
-            }}
-          >
-            <img 
-              src="/assets/profilepic.jpeg" 
-              alt="Amit - Full Stack Developer" 
-              className="w-full h-full object-cover object-center opacity-80"
-              style={{
-                // Additional mix-blend-mode just in case the jpeg has a solid background that can be blended out
-                mixBlendMode: 'lighten'
-              }}
-            />
-          </div>
-          
-          {/* Subtle foreground noise/texture overlay over the image for blending */}
-          <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay pointer-events-none"></div>
         </motion.div>
 
       </div>

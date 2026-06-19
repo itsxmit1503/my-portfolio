@@ -74,7 +74,7 @@ export function Github() {
           <SpotlightCard className="w-full h-full bg-white/[0.02] border border-white/5 p-8 flex flex-col justify-center rounded-2xl transition-colors duration-500 hover:border-white/20">
              <h4 className="text-sm font-semibold tracking-widest text-neutral-500 uppercase mb-6">Repository Highlights</h4>
              <div className="space-y-4 relative z-10">
-                {["Tolkify", "Unsaid", "Track My Rail", "Hill Basket"].map(repo => (
+                {["Tolkify", "Hill Basket"].map(repo => (
                   <a key={repo} href="https://github.com/itsxmit1503" target="_blank" rel="noreferrer" className="flex items-center justify-between p-4 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 transition-colors group hover:border-white/20">
                     <span className="text-sm font-medium text-neutral-300 group-hover:text-white transition-colors">{repo}</span>
                     <svg className="w-4 h-4 text-neutral-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
