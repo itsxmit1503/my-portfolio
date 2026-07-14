@@ -38,22 +38,23 @@ export function Skills() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {skillCategories.map((category, i) => (
-          <motion.div 
+            <motion.div 
             key={i}
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: i * 0.1, duration: 0.6, ease: [0.16, 1, 0.3, 1] as any }}
+            transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
             className={i >= 3 ? 'md:col-span-2 lg:col-span-1' : ''}
           >
-            <SpotlightCard className="h-full flex flex-col rounded-2xl bg-[#050505] border border-white/5 p-8 transition-colors duration-500 hover:border-white/20">
+            <SpotlightCard className="h-full flex flex-col rounded-3xl bg-[#050505] border border-white/5 p-8 transition-all duration-700 hover:border-emerald-500/30 group overflow-hidden relative">
+              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
               <div className="relative z-10">
-                <h4 className="text-xl font-medium tracking-tight text-white mb-6">{category.title}</h4>
+                <h4 className="text-xl font-medium tracking-tight text-white mb-6 group-hover:text-emerald-400 transition-colors">{category.title}</h4>
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map(skill => (
                     <span 
                       key={skill} 
-                      className="px-4 py-2 text-sm font-medium bg-white/[0.03] border border-white/5 rounded-lg text-neutral-300 transition-colors hover:border-white/20 hover:text-white"
+                      className="px-4 py-2 text-sm font-medium bg-white/[0.03] border border-white/5 rounded-lg text-neutral-400 transition-colors group-hover:border-emerald-500/20 group-hover:text-neutral-200"
                     >
                       {skill}
                     </span>

@@ -72,25 +72,29 @@ export function Experience() {
 
         {/* Current Focus Area */}
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
-          className="bg-[#050505] border border-white/10 rounded-2xl p-8 self-start sticky top-32"
+          className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl self-start sticky top-32 group overflow-hidden relative transition-all duration-700 hover:border-violet-500/30"
         >
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <h4 className="text-lg font-medium text-white">Currently Learning</h4>
-          </div>
+          <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
           
-          <ul className="space-y-4">
-            {["PHP", "DBMS (Database Management Systems)", "Data Structures", "OOP using C++"].map((topic, i) => (
-              <li key={i} className="flex items-center gap-3 text-neutral-400">
-                <svg className="w-4 h-4 text-neutral-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-                {topic}
-              </li>
-            ))}
-          </ul>
+          <div className="relative z-10">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="w-2 h-2 rounded-full bg-violet-500 animate-pulse" />
+              <h4 className="text-xl font-medium text-white tracking-tight">Currently Learning</h4>
+            </div>
+            
+            <ul className="space-y-4">
+              {["PHP", "DBMS (Database Management Systems)", "Data Structures", "OOP using C++"].map((topic, i) => (
+                <li key={i} className="flex items-center gap-4 text-neutral-400 group-hover:text-neutral-300 transition-colors">
+                  <svg className="w-4 h-4 text-violet-500/50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+                  {topic}
+                </li>
+              ))}
+            </ul>
+          </div>
         </motion.div>
       </div>
     </section>

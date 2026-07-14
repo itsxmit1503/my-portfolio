@@ -15,7 +15,7 @@ function ChatTiltShowcase() {
         <div className="w-full max-w-sm flex flex-col gap-4 relative z-10">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="self-start bg-[#111] border border-white/10 px-4 py-3 rounded-2xl rounded-tl-sm shadow-xl"
           >
@@ -25,7 +25,7 @@ function ChatTiltShowcase() {
           
           <motion.div 
             initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             className="self-end bg-blue-600/20 border border-blue-500/30 px-4 py-3 rounded-2xl rounded-tr-sm shadow-xl"
           >
@@ -35,7 +35,7 @@ function ChatTiltShowcase() {
 
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
             className="self-start bg-[#111] border border-white/10 px-4 py-3 rounded-2xl rounded-tl-sm shadow-xl"
           >
@@ -68,7 +68,7 @@ function GlassInteractiveShowcase() {
         
         <button 
           onClick={() => setIsRaining(!isRaining)}
-          className="absolute top-4 right-4 z-20 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/50 hover:text-white hover:bg-white/10 transition-all backdrop-blur-md"
+          className="absolute top-4 right-4 z-20 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-xs text-white/50 hover:text-white hover:bg-white/10 transition-all backdrop-blur-md cursor-pointer"
         >
           Toggle Weather
         </button>
@@ -76,7 +76,7 @@ function GlassInteractiveShowcase() {
         <motion.div 
           className="relative z-10 w-full max-w-xs p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-xl shadow-2xl flex flex-col items-center justify-center gap-2"
           initial={{ y: 20, opacity: 0 }}
-          whileInView={{ y: 0, opacity: 1 }}
+          animate={{ y: 0, opacity: 1 }}
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
         >
           <div className="text-white/50 text-sm tracking-wider uppercase">Available Reserve</div>
@@ -104,7 +104,7 @@ function FlowDiagramShowcase() {
           
           <motion.div 
             initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
+            animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", bounce: 0.4, delay: 0.1 }}
             className="w-24 h-24 rounded-2xl bg-[#111] border border-white/10 flex flex-col items-center justify-center gap-2 shadow-xl"
           >
@@ -116,14 +116,14 @@ function FlowDiagramShowcase() {
 
           <motion.div 
             initial={{ width: 0, opacity: 0 }}
-            whileInView={{ width: 40, opacity: 1 }}
+            animate={{ width: 40, opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.3 }}
             className="hidden md:block h-px bg-gradient-to-r from-violet-500/50 to-transparent"
           />
 
           <motion.div 
             initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
+            animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", bounce: 0.4, delay: 0.5 }}
             className="w-24 h-24 rounded-2xl bg-[#111] border border-white/10 flex flex-col items-center justify-center gap-2 shadow-xl relative"
           >
@@ -134,7 +134,7 @@ function FlowDiagramShowcase() {
             
             <motion.div 
               initial={{ scale: 0, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
+              animate={{ scale: 1, opacity: 1 }}
               transition={{ type: "spring", delay: 1.2 }}
               className="absolute -top-3 -right-3 w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center"
             >
@@ -145,21 +145,21 @@ function FlowDiagramShowcase() {
 
           <motion.div 
             initial={{ width: 0, opacity: 0 }}
-            whileInView={{ width: 40, opacity: 1 }}
+            animate={{ width: 40, opacity: 1 }}
             transition={{ duration: 0.4, delay: 0.7 }}
             className="hidden md:block h-px bg-gradient-to-r from-blue-500/50 to-transparent"
           />
 
           <motion.div 
             initial={{ scale: 0.8, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
+            animate={{ scale: 1, opacity: 1 }}
             transition={{ type: "spring", bounce: 0.4, delay: 0.9 }}
             className="w-24 h-24 rounded-2xl bg-[#111] border border-white/10 flex flex-col items-center justify-center gap-2 shadow-xl"
           >
             <div className="w-8 h-8 rounded bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 relative overflow-hidden">
                <motion.div 
                  initial={{ height: 0 }}
-                 whileInView={{ height: "60%" }}
+                 animate={{ height: "60%" }}
                  transition={{ duration: 1, delay: 1.5 }}
                  className="absolute bottom-0 left-0 right-0 bg-emerald-500/30"
                />
