@@ -47,14 +47,23 @@ export function Experience() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
         {/* The Timeline */}
-        <div className="relative border-l border-white/10 ml-4 md:ml-6 pl-8 md:pl-12 space-y-12 py-4">
+        <motion.div 
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-100px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            show: { opacity: 1, transition: { staggerChildren: 0.1 } }
+          }}
+          className="relative border-l border-white/10 ml-4 md:ml-6 pl-8 md:pl-12 space-y-12 py-4"
+        >
           {milestones.map((milestone, i) => (
             <motion.div 
               key={i}
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ delay: i * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] as any }}
+              variants={{
+                hidden: { opacity: 0, x: -20 },
+                show: { opacity: 1, x: 0, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const } }
+              }}
               className="relative"
             >
               {/* Timeline Node */}
@@ -63,19 +72,19 @@ export function Experience() {
               <h4 className={`text-xl font-medium tracking-tight mb-2 ${milestone.highlight ? 'text-white' : 'text-neutral-300'}`}>
                 {milestone.topic}
               </h4>
-              <p className="text-sm text-neutral-500">
+              <p className="text-sm text-neutral-500 leading-relaxed">
                 {milestone.details}
               </p>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Current Focus Area */}
         <motion.div 
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
-          transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
+          transition={{ delay: 0.3, duration: 0.8, ease: [0.16, 1, 0.3, 1] as const }}
           className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl self-start sticky top-32 group overflow-hidden relative transition-all duration-700 hover:border-violet-500/30"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />

@@ -36,14 +36,23 @@ export function Skills() {
         </h3>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <motion.div 
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-50px" }}
+        variants={{
+          hidden: { opacity: 0 },
+          show: { opacity: 1, transition: { staggerChildren: 0.1 } }
+        }}
+        className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+      >
         {skillCategories.map((category, i) => (
             <motion.div 
             key={i}
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: i * 0.1, duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
+            variants={{
+              hidden: { opacity: 0, y: 40 },
+              show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } }
+            }}
             className={i >= 3 ? 'md:col-span-2 lg:col-span-1' : ''}
           >
             <SpotlightCard className="h-full flex flex-col rounded-3xl bg-[#050505] border border-white/5 p-8 transition-all duration-700 hover:border-emerald-500/30 group overflow-hidden relative">
@@ -64,7 +73,7 @@ export function Skills() {
             </SpotlightCard>
           </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 }

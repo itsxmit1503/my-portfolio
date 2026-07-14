@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
-import { MouseEvent, useState } from "react";
+import { MouseEvent } from "react";
 
 interface SpotlightCardProps {
   children: React.ReactNode;
@@ -16,7 +16,6 @@ export function SpotlightCard({
 }: SpotlightCardProps) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
-  const [isHovered, setIsHovered] = useState(false);
 
   function handleMouseMove({ currentTarget, clientX, clientY }: MouseEvent) {
     const { left, top } = currentTarget.getBoundingClientRect();
@@ -28,8 +27,6 @@ export function SpotlightCard({
     <div
       className={`relative group overflow-hidden ${className}`}
       onMouseMove={handleMouseMove}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
     >
       <motion.div
         className="pointer-events-none absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100"

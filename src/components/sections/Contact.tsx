@@ -6,12 +6,21 @@ import { MagneticButton } from "../ui/MagneticButton";
 export function Contact() {
   return (
     <section id="contact" className="relative w-full py-24 border-t border-white/5">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+      <motion.div 
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-50px" }}
+        variants={{
+          hidden: { opacity: 0 },
+          show: { opacity: 1, transition: { staggerChildren: 0.1 } }
+        }}
+        className="grid grid-cols-1 lg:grid-cols-2 gap-16"
+      >
         
-        <div>
+        <motion.div variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } } }}>
           <h2 className="text-sm font-semibold tracking-widest text-neutral-500 uppercase mb-4">Contact</h2>
           <h3 className="text-4xl md:text-5xl font-medium tracking-tight text-white mb-6">
-            Let's build something <br className="hidden md:block"/> extraordinary.
+            Let&apos;s build something <br className="hidden md:block"/> extraordinary.
           </h3>
           <p className="text-lg text-neutral-400 leading-relaxed max-w-md mb-8">
             Whether you have a project in mind, a question about my work, or just want to connect—my inbox is always open.
@@ -35,13 +44,10 @@ export function Contact() {
               </a>
             </MagneticButton>
           </div>
-        </div>
+        </motion.div>
 
         <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
+          variants={{ hidden: { opacity: 0, scale: 0.95 }, show: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } } }}
           className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl relative group overflow-hidden transition-all duration-700 hover:border-white/20"
         >
           <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
@@ -83,7 +89,7 @@ export function Contact() {
           </form>
         </motion.div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }

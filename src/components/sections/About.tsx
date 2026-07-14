@@ -6,15 +6,29 @@ export function About() {
   return (
     <section id="about" className="relative w-full py-32 border-t border-white/5">
       <motion.div 
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial="hidden"
+        whileInView="show"
         viewport={{ once: true, margin: "-100px" }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] as any }}
+        variants={{
+          hidden: { opacity: 0 },
+          show: {
+            opacity: 1,
+            transition: { staggerChildren: 0.15, delayChildren: 0.1 }
+          }
+        }}
         className="w-full max-w-4xl"
       >
-        <h2 className="text-sm font-semibold tracking-widest text-neutral-500 uppercase mb-8">About Me</h2>
+        <motion.h2 
+          variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } } }}
+          className="text-sm font-semibold tracking-widest text-neutral-500 uppercase mb-8"
+        >
+          About Me
+        </motion.h2>
         
-        <div className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl relative group overflow-hidden">
+        <motion.div 
+          variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } } }}
+          className="bg-[#050505] border border-white/10 rounded-3xl p-8 md:p-12 shadow-2xl relative group overflow-hidden"
+        >
           <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 text-lg text-neutral-400 leading-relaxed relative z-10">
@@ -35,7 +49,7 @@ export function About() {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
       </motion.div>
     </section>
   );
