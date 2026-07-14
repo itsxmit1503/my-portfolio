@@ -7,9 +7,8 @@ export function Footer() {
       </div>
       
       <div className="flex gap-6 text-sm font-medium text-neutral-500">
-        <a href="#" className="hover:text-white transition-colors">GitHub</a>
-        <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
-        <a href="#" className="hover:text-white transition-colors">Resume</a>
+        <a href="https://github.com/itsxmit1503" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">GitHub</a>
+        <a href="https://www.linkedin.com/in/amit-b82142396" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">LinkedIn</a>
       </div>
     </footer>
   );
