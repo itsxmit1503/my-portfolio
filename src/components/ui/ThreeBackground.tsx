@@ -5,46 +5,34 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { useInView } from "framer-motion";
 
-function ParticleField() {
-  const pointsRef = useRef<THREE.Points>(null);
-
-  // Generate a very low-poly geometry (500 points max for high performance)
-  const [positions] = useMemo(() => {
-    const count = 500;
-    const pos = new Float32Array(count * 3);
-    for (let i = 0; i < count * 3; i++) {
-      pos[i] = (Math.random() - 0.5) * 10;
-    }
-    return [pos];
-  }, []);
+function IcosahedronWireframe() {
+  const meshRef = useRef<THREE.Mesh>(null);
 
   useFrame((state, delta) => {
-    if (pointsRef.current) {
-      // GPU accelerated transform animations only
-      pointsRef.current.rotation.y += delta * 0.05;
-      pointsRef.current.rotation.x += delta * 0.02;
+    if (meshRef.current) {
+      // Auto-rotation
+      meshRef.current.rotation.y += delta * 0.15;
+      meshRef.current.rotation.x += delta * 0.1;
+      
+      // Parallax effect reacting to mouse
+      const targetX = (state.pointer.x * Math.PI) / 4;
+      const targetY = (state.pointer.y * Math.PI) / 4;
+      
+      meshRef.current.rotation.y += (targetX - meshRef.current.rotation.y) * 0.05;
+      meshRef.current.rotation.x += (targetY - meshRef.current.rotation.x) * 0.05;
     }
   });
 
   return (
-    <points ref={pointsRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          args={[positions, 3]}
-          count={positions.length / 3}
-          array={positions}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.02}
-        color="#ffffff"
-        transparent
-        opacity={0.3}
-        sizeAttenuation={true}
+    <mesh ref={meshRef}>
+      <icosahedronGeometry args={[2, 0]} />
+      <meshBasicMaterial 
+        color="#C1FF72" 
+        wireframe 
+        transparent 
+        opacity={0.3} 
       />
-    </points>
+    </mesh>
   );
 }
 
@@ -80,7 +68,7 @@ export default function ThreeBackground() {
           dpr={[1, 2]} // limit dpr for performance
           gl={{ antialias: false, powerPreference: "high-performance", alpha: true }}
         >
-          <ParticleField />
+          <IcosahedronWireframe />
         </Canvas>
       )}
     </div>
