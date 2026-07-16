@@ -39,6 +39,17 @@ export function Hero() {
     }, 0);
   }, { scope: containerRef });
 
+  const headlineWords = [
+    { text: "Building", italic: false, highlight: false },
+    { text: "real-world", italic: false, highlight: false },
+    { text: "web", italic: true, highlight: true },
+    { text: "applications,", italic: true, highlight: true },
+    { text: "communities,", italic: false, highlight: false },
+    { text: "and", italic: false, highlight: false },
+    { text: "digital", italic: false, highlight: false },
+    { text: "experiences.", italic: false, highlight: false }
+  ];
+
   return (
     <section ref={containerRef} className="relative min-h-screen flex flex-col justify-between pt-24 pb-12 overflow-hidden bg-[#F7F3EC]">
       
@@ -53,7 +64,7 @@ export function Hero() {
         >
           <div className="flex flex-col gap-1">
             <span className="text-[#6B6459] text-[10px] font-bold tracking-[0.2em] uppercase font-sans">
-              Issue — Full Stack Developer
+              Issue 01 — Full Stack Developer
             </span>
             <span className="text-[#1A1714] text-sm font-semibold uppercase tracking-wider font-sans">
               Amit
@@ -65,17 +76,25 @@ export function Hero() {
           </span>
         </motion.div>
 
-        {/* Big Serif Headline */}
+        {/* Big Serif Headline with Kinetic Text */}
         <div className="w-full mb-16 flex-1 flex items-center">
-          <motion.h1 
-            ref={headlineRef}
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="font-serif text-[clamp(2.5rem,5vw,4.5rem)] font-[600] text-[#1A1714] leading-[1.05] tracking-normal max-w-4xl"
-          >
-            Building real-world <span className="text-[#C1502E] italic">web applications</span>, communities, and digital experiences.
-          </motion.h1>
+          <h1 ref={headlineRef} className="font-serif text-[clamp(2.5rem,5vw,4.5rem)] font-[600] text-[#1A1714] leading-[1.05] tracking-normal max-w-4xl flex flex-wrap gap-x-[0.3em] gap-y-[0.1em]">
+            {headlineWords.map((word, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 30, filter: "blur(10px)" }}
+                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                transition={{ 
+                  duration: 1, 
+                  delay: i * 0.1, 
+                  ease: [0.16, 1, 0.3, 1] 
+                }}
+                className={`inline-block ${word.italic ? "italic" : ""} ${word.highlight ? "text-[#C1502E]" : ""}`}
+              >
+                {word.text}
+              </motion.span>
+            ))}
+          </h1>
         </div>
 
         {/* Asymmetric Lower Right Content */}
@@ -84,7 +103,7 @@ export function Hero() {
             ref={contentRef}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 1, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="w-full md:w-5/12 flex flex-col gap-8 md:-mt-32 bg-[#F7F3EC] md:p-6 lg:p-8"
           >
             <p className="text-base md:text-lg text-[#6B6459] leading-relaxed font-sans">

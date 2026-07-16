@@ -6,7 +6,6 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const fraunces = Fraunces({ 
   subsets: ["latin"], 
   variable: "--font-fraunces",
-  axes: ["SOFT"],
 });
 
 export const metadata: Metadata = {
@@ -15,6 +14,8 @@ export const metadata: Metadata = {
 };
 
 import { EditorialCursor } from "@/components/ui/EditorialCursor";
+import { Preloader } from "@/components/ui/Preloader";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
 
 export default function RootLayout({
   children,
@@ -24,6 +25,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="scroll-smooth">
       <body className={`${inter.variable} ${fraunces.variable} font-sans bg-[#F7F3EC] text-[#1A1714] antialiased selection:bg-[#1B2A4A] selection:text-[#F7F3EC]`}>
+        <Preloader />
+        <ScrollProgress />
         <div 
           className="fixed inset-0 z-0 pointer-events-none opacity-[0.04] mix-blend-overlay"
           style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }}

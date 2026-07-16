@@ -144,67 +144,40 @@ function FlowDiagramShowcase() {
 
 
 // ==========================================
-// GSAP SCROLL SECTION
+// GSAP HORIZONTAL SCROLL GALLERY
 // ==========================================
 
 export function Products() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const galleryRef = useRef<HTMLDivElement>(null);
 
-  // Prepare ordered array of projects (featured first, then the rest)
   const featured = projects.find(p => p.id === 'pocketpilot');
   const others = projects.filter(p => p.id !== 'pocketpilot');
   const orderedProjects = featured ? [featured, ...others] : others;
 
   useGSAP(() => {
-    // Only apply GSAP pinning on desktop to avoid mobile jank, or apply globally but carefully.
-    // For safety, apply it globally but ensure the container is tall enough.
-    const cards = cardsRef.current;
+    if (!galleryRef.current || !containerRef.current) return;
     
-    // Set initial states
-    gsap.set(cards, { position: "absolute", top: 0, left: 0, width: "100%", height: "100%" });
-    // First card is fully visible, others are hidden/translated
-    gsap.set(cards.slice(1), { opacity: 0, y: 100, scale: 0.95 });
-
-    const tl = gsap.timeline({
+    // Convert children to an array for GSAP
+    const cards = gsap.utils.toArray(galleryRef.current.children);
+    
+    // We animate the gallery wrapper container horizontally
+    gsap.to(cards, {
+      xPercent: -100 * (cards.length - 1),
+      ease: "none",
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top top",
-        end: `+=${100 * cards.length}%`, // Scroll distance proportional to number of cards
         pin: true,
-        scrub: 1, // Smooth scrubbing
+        scrub: 1,
+        // Match scroll distance precisely to the gallery width
+        end: () => `+=${galleryRef.current?.offsetWidth || 0}`
       }
-    });
-
-    // Animate from frame to frame
-    cards.forEach((card, i) => {
-      if (i === 0) return; // skip first as it's already in place
-      
-      const prevCard = cards[i - 1];
-
-      // Animate previous card out
-      tl.to(prevCard, {
-        opacity: 0,
-        scale: 0.9,
-        y: -50,
-        ease: "power2.inOut",
-        duration: 1
-      }, i * 2);
-
-      // Animate current card in
-      tl.to(card, {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        ease: "power2.inOut",
-        duration: 1
-      }, i * 2);
     });
 
   }, { scope: containerRef });
 
   return (
-    <section id="projects" className="relative w-full border-t border-[#1A1714]/10 bg-[#F7F3EC]">
+    <section id="projects" className="relative w-full border-t border-[#1A1714]/10 bg-[#F7F3EC] overflow-hidden">
       <div className="w-full py-24 max-w-7xl mx-auto px-6 lg:px-12 flex flex-col items-center">
         <h2 className="text-xs font-semibold tracking-[0.2em] text-[#C1502E] uppercase mb-4 font-sans">Featured Work</h2>
         <h3 className="font-serif text-4xl md:text-5xl font-[600] text-[#1A1714] mb-8 text-center">
@@ -213,72 +186,76 @@ export function Products() {
       </div>
 
       {/* The pinned container */}
-      <div ref={containerRef} className="relative w-full h-[100vh] max-w-7xl mx-auto px-6 lg:px-12 pb-24 overflow-hidden">
-        {orderedProjects.map((project, index) => {
-          const isEven = index % 2 === 0;
-          const indexNum = `0${index + 1}`;
+      <div ref={containerRef} className="relative w-full h-[100vh] flex items-center">
+        {/* The horizontal tracking wrapper */}
+        <div ref={galleryRef} className="flex h-full items-center px-12 gap-8 md:gap-16 w-[300vw] md:w-[200vw]">
+          {orderedProjects.map((project, index) => {
+            const indexNum = `0${index + 1}`;
 
-          return (
-            <div 
-              key={project.id}
-              ref={el => { cardsRef.current[index] = el }}
-              className="flex flex-col md:flex-row bg-[#FDFBF7] border border-[#1A1714]/10 h-full max-h-[70vh] shadow-sm relative overflow-hidden"
-            >
-              {/* Background Index Number */}
-              <div className="absolute top-4 left-4 md:-top-8 md:-left-8 text-[8rem] md:text-[16rem] font-serif font-bold text-[#C1502E] opacity-[0.03] select-none pointer-events-none leading-none z-0">
-                {indexNum}
-              </div>
-
-              {/* Layout varies by index: Image Left vs Image Right */}
-              <div className={`w-full md:w-1/2 h-1/2 md:h-full flex items-center justify-center p-6 border-b md:border-b-0 md:border-r border-[#1A1714]/10 z-10 ${!isEven ? 'md:order-2 md:border-l md:border-r-0' : ''}`}>
-                <div className="w-full h-full relative">
-                  {project.showcaseType === 'glass-interactive' && <GlassInteractiveShowcase />}
-                  {project.showcaseType === 'chat-tilt' && <ChatTiltShowcase />}
-                  {project.showcaseType === 'flow-diagram' && <FlowDiagramShowcase />}
+            return (
+              <div 
+                key={project.id}
+                data-cursor="VIEW PROJECT"
+                className="flex-shrink-0 w-[85vw] md:w-[45vw] lg:w-[35vw] flex flex-col bg-[#FDFBF7] border border-[#1A1714]/10 h-[65vh] shadow-sm relative overflow-hidden group transition-all hover:border-[#1A1714]/30 hover:scale-[1.02]"
+              >
+                {/* Background Index Number */}
+                <div className="absolute -top-4 -right-4 text-[12rem] font-serif font-bold text-[#C1502E] opacity-[0.03] select-none pointer-events-none leading-none z-0">
+                  {indexNum}
                 </div>
-              </div>
 
-              {/* Content Side */}
-              <div className={`w-full md:w-1/2 h-1/2 md:h-full p-8 md:p-12 flex flex-col justify-center z-10 ${!isEven ? 'md:order-1' : ''}`}>
-                <div className="flex items-center gap-3 mb-6">
-                  <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#6B6459] font-sans">
-                    {project.category}
-                  </span>
+                {/* Showcase Graphic */}
+                <div className="w-full h-[55%] border-b border-[#1A1714]/10 p-6 flex items-center justify-center relative z-10 bg-[#F7F3EC]/50">
+                  <div className="w-full h-full relative">
+                    {project.showcaseType === 'glass-interactive' && <GlassInteractiveShowcase />}
+                    {project.showcaseType === 'chat-tilt' && <ChatTiltShowcase />}
+                    {project.showcaseType === 'flow-diagram' && <FlowDiagramShowcase />}
+                  </div>
                 </div>
-                
-                <h4 className="text-3xl md:text-4xl font-serif font-[600] text-[#1A1714] mb-6">
-                  {project.title}
-                </h4>
-                
-                <p className="text-base md:text-lg text-[#6B6459] leading-relaxed mb-8 max-w-md font-sans">
-                  {project.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-8">
-                  {project.stack.map(tech => (
-                    <span key={tech} className="px-3 py-1.5 text-[10px] font-mono font-medium border border-[#1A1714]/20 text-[#1A1714]">
-                      {tech}
+
+                {/* Content */}
+                <div className="w-full h-[45%] p-6 md:p-8 flex flex-col z-10 relative bg-[#FDFBF7]">
+                  <div className="flex items-center justify-between mb-4">
+                    <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#6B6459] font-sans">
+                      {project.category}
                     </span>
-                  ))}
-                </div>
+                    <span className="text-xs font-serif font-bold text-[#C1502E]">{indexNum}</span>
+                  </div>
+                  
+                  <h4 className="text-2xl md:text-3xl font-serif font-[600] text-[#1A1714] mb-4">
+                    {project.title}
+                  </h4>
+                  
+                  <div className="flex flex-wrap gap-2 mb-auto">
+                    {project.stack.slice(0, 3).map(tech => (
+                      <span key={tech} className="px-2 py-1 text-[9px] font-mono font-medium border border-[#1A1714]/20 text-[#1A1714]">
+                        {tech}
+                      </span>
+                    ))}
+                    {project.stack.length > 3 && (
+                      <span className="px-2 py-1 text-[9px] font-mono font-medium border border-[#1A1714]/20 text-[#6B6459]">
+                        +{project.stack.length - 3}
+                      </span>
+                    )}
+                  </div>
 
-                <div className="flex items-center gap-6 mt-auto">
-                  <a href={project.liveUrl} target="_blank" rel="noreferrer" data-cursor="VISIT" className="text-sm font-semibold uppercase tracking-widest text-[#1B2A4A] hover:text-[#C1502E] transition-colors relative group font-sans">
-                    Live Demo
-                    <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-[#C1502E] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
-                  </a>
-                  {project.repoUrl && (
-                    <a href={project.repoUrl} target="_blank" rel="noreferrer" data-cursor="CODE" className="text-sm font-semibold uppercase tracking-widest text-[#6B6459] hover:text-[#1A1714] transition-colors relative group font-sans">
-                      Source
-                      <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-[#1A1714] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+                  <div className="flex items-center gap-6 mt-6">
+                    <a href={project.liveUrl} target="_blank" rel="noreferrer" className="text-xs font-semibold uppercase tracking-widest text-[#1B2A4A] hover:text-[#C1502E] transition-colors relative group font-sans">
+                      Live Demo
+                      <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-[#C1502E] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
                     </a>
-                  )}
+                    {project.repoUrl && (
+                      <a href={project.repoUrl} target="_blank" rel="noreferrer" className="text-xs font-semibold uppercase tracking-widest text-[#6B6459] hover:text-[#1A1714] transition-colors relative group font-sans">
+                        Source
+                        <span className="absolute -bottom-1 left-0 w-full h-[1px] bg-[#1A1714] scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
 
-            </div>
-          );
-        })}
+              </div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
