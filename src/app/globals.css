@@ -1,18 +1,21 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #0B0B0D;
-  --color-foreground: #ffffff;
+  --color-background: #F7F3EC;
+  --color-foreground: #1A1714;
   
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
 }
 
 :root {
-  --background: #0B0B0D;
-  --foreground: #ffffff;
-  --surface: #141416;
-  --surface-hover: #1C1C1F;
-  --accent-lime: #C1FF72;
+  --background: #F7F3EC;
+  --foreground: #1A1714;
+  --surface: #FDFBF7;
+  --surface-hover: #F0EBE1;
+  --accent-navy: #1B2A4A;
+  --accent-rust: #C1502E;
+  --muted: #6B6459;
 }
 
 body {
@@ -28,14 +31,14 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #F7F3EC;
 }
 ::-webkit-scrollbar-thumb {
-  background: #222222;
+  background: #E5DFD3;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #333333;
+  background: #D4CDBE;
 }
 
 /* Base Utility Classes for Typography */
